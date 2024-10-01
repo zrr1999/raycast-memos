@@ -53,4 +53,4 @@ jobs:
           fork-repo: zrr1999/raycast-extensions
           token: ${{ secrets.PAT_TOKEN }}
           committer: zrr1999 <2742392377@qq.com>
-          extension-name: memos
+          extension-name: usememos
