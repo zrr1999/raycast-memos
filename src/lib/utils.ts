@@ -1,6 +1,5 @@
 import { Memo } from "./types";
 import { getPreferenceValues, Cache } from "@raycast/api";
-import { PreferenceValues } from "./types";
 import { OpenAI } from "openai";
 import crypto from "crypto";
 
@@ -10,45 +9,8 @@ function getContentHash(content: string): string {
   return crypto.createHash('sha256').update(content).digest('hex');
 }
 
-export async function getSummary(memo: Memo) {
-  const { openAiApiKey, openAiBasePath, model, language } = getPreferenceValues<PreferenceValues>();
-  const contentHash = getContentHash(memo.content);
-  const cachedSummary = cache.get(`summary-${contentHash}`);
-
-  if (cachedSummary) {
-    return cachedSummary;
-  }
-
-  if (!openAiApiKey) {
-    return memo.content;
-  }
-
-  const openai = new OpenAI({
-    apiKey: openAiApiKey,
-    baseURL: openAiBasePath,
-  });
-
-  const answer = await openai.chat.completions.create({
-    model: model,
-    messages: [
-      {
-        role: "system",
-        content: `You are a helpful assistant that summarizes the given content as a concise title. Your must use ${language}!!`,
-      },
-      { role: "user", content: memo.content },
-    ],
-  });
-
-  if (answer.choices[0].message.content) {
-    cache.set(`summary-${contentHash}`, answer.choices[0].message.content);
-    return answer.choices[0].message.content;
-  }
-
-  return memo.content;
-}
-
 export async function getSummaryStream(memo: Memo) {
-  const { openAiApiKey, openAiBasePath, model, language } = getPreferenceValues<PreferenceValues>();
+  const { openAiApiKey, openAiBasePath, model, language } = getPreferenceValues<ExtensionPreferences>();
   const contentHash = getContentHash(memo.content);
   const cachedSummary = cache.get(`summary-${contentHash}`);
 

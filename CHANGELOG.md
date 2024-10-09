@@ -1,5 +1,9 @@
 # Usememos Changelog
 
+## [Upgrade Usememos] - 2024-10-09
+
+- ♻️ refactor: remove unused code and use raycast-env.d.ts
+
 ## [Upgrade Usememos] - 2024-10-01
 
 - ✨ feat: add publish action

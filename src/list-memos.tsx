@@ -1,6 +1,6 @@
 import { getPreferenceValues, List, ActionPanel, Action } from "@raycast/api";
 import { useFetch } from "@raycast/utils";
-import { PreferenceValues, MemoListProps, Memo } from "./lib/types";
+import { MemoListProps, Memo } from "./lib/types";
 import { getSummaryStream } from "./lib/utils";
 import { useRef, useState, useEffect, useCallback } from "react";
 
@@ -34,7 +34,7 @@ function getMemoItemsStream(memos: Memo[], isLoadingMemos: boolean) {
 }
 
 export default function listMemos() {
-  const { memosServerUrl, memosServerToken } = getPreferenceValues<PreferenceValues>();
+  const { memosServerUrl, memosServerToken } = getPreferenceValues<Preferences.ListMemos>();
 
   const { isLoading, data } = useFetch<MemoListProps>(`${memosServerUrl}/api/v1/memos`, {
     method: "GET",
