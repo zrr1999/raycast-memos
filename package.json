@@ -72,7 +72,7 @@
     },
     {
       "name": "memosServerToken",
-      "type": "textfield",
+      "type": "password",
       "title": "Memos Server Token",
       "description": "Token is used to authenticate with the memos server",
       "required": true

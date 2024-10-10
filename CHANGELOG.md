@@ -1,5 +1,8 @@
 # Usememos Changelog
 
+## [Upgrade Usememos] - 2024-10-10
+- 🐛 fix: change `memosServerToken` type to password
+
 ## [Upgrade Usememos] - 2024-10-09
 
 - ♻️ refactor: remove unused code and use raycast-env.d.ts
