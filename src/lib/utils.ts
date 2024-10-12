@@ -6,7 +6,7 @@ import crypto from "crypto";
 const cache = new Cache();
 
 function getContentHash(content: string): string {
-  return crypto.createHash('sha256').update(content).digest('hex');
+  return crypto.createHash("sha256").update(content).digest("hex");
 }
 
 export async function getSummaryStream(memo: Memo) {
@@ -15,15 +15,15 @@ export async function getSummaryStream(memo: Memo) {
   const cachedSummary = cache.get(`summary-${contentHash}`);
 
   if (cachedSummary) {
-    return async function* () {
+    return (async function* () {
       yield cachedSummary;
-    }();
+    })();
   }
 
   if (!openAiApiKey) {
-    return async function* () {
+    return (async function* () {
       yield memo.content;
-    }();
+    })();
   }
 
   const openai = new OpenAI({
@@ -43,7 +43,7 @@ export async function getSummaryStream(memo: Memo) {
     stream: true,
   });
 
-  return async function* () {
+  return (async function* () {
     let content = "";
     for await (const chunk of stream) {
       content += chunk.choices[0]?.delta?.content || "";
@@ -52,5 +52,5 @@ export async function getSummaryStream(memo: Memo) {
     if (content) {
       cache.set(`summary-${contentHash}`, content);
     }
-  }()
+  })();
 }

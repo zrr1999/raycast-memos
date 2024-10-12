@@ -1,5 +1,9 @@
 # Usememos Changelog
 
+## [Upgrade Usememos] - 2024-10-12
+
+- ✨ feat: split memos into pinned, common, and archived categories
+
 ## [Upgrade Usememos] - 2024-10-10
 - 🐛 fix: change `memosServerToken` type to password
 
